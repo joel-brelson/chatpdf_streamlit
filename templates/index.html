@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Chat</title>
+
+    <script>
+        function askQuestion() {
+            const pdfFile = document.getElementById('pdf_file').files[0];
+            const question = document.getElementById('question').value;
+
+            // Create a FormData object to send the file and question to the server
+            const formData = new FormData();
+            formData.append('pdf_file', pdfFile);
+            formData.append('question', question);
+
+            // Send a POST request to the server using the Flask route
+            fetch('/chat', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatHistoryDiv = document.getElementById('chat-history');
+                chatHistoryDiv.innerHTML += `You: ${question}<br>`;
+                chatHistoryDiv.innerHTML += `Bot: ${data.answer}<br>`;
+
+                if (data.exit) {
+                    // Handle exit logic if needed
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body style="background-color: antiquewhite;">
+    <h1><center style="color: darkblue;">PDF Chat</center></h1>
+    <form enctype="multipart/form-data">
+        <label for="pdf_file">Upload a PDF File:</label>
+        <input type="file" name="pdf_file" id="pdf_file" required><br><br>
+
+        <input type="text" name="question" id="question" style="height: 45px;width: 90%;padding-left: 20px;background-color: lightgray;font-size: 16px;" placeholder="Ask your question here" required><br><br>
+
+        <input type="button" value="Ask" onclick="askQuestion()">
+        <input type="button" value="Exit">
+    </form>
+    <hr>
+    <h2>Chat History:</h2>
+    <div id="chat-history">
+        <!-- Chat history will be displayed here -->
+    </div>
+</body>
+</html>
