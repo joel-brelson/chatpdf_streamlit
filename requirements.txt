@@ -1,6 +1,6 @@
 flask
 pinecone-client
-langchain
+langchain==0.0.134
 pydantic==1.10.9
 sentence-transformers
 pypdf
