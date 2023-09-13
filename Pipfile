@@ -4,9 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask
-pinecone-client
-langchain
+flask = "*"
 [dev-packages]
 
 [requires]
