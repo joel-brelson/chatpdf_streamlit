@@ -7,6 +7,9 @@ name = "pypi"
 flask = "*"
 pinecone-client = "*"
 langchain = "*"
+sentence-transformers = "*"
+pypdf = "*"
+replicate = "*"
 [dev-packages]
 
 [requires]
