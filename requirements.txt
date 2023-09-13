@@ -2,6 +2,6 @@ flask
 pinecone-client
 langchain
 pydantic
-sentence-transformersS
+sentence-transformers
 pypdf
 replicate
